@@ -5,7 +5,9 @@ const fighterSchema = mongoose.Schema({
     name: String,
     age: Number,
     sex: String,
-    email: String
+    email: String,
+    ship: String,
+    url: String
 });
 
 module.exports = mongoose.model("Fighter", fighterSchema);

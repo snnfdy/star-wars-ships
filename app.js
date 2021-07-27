@@ -5,9 +5,7 @@ const mongoose = require("mongoose");
 const fighterRoutes = require("./fighters");
 
 mongoose.connect("mongodb+srv://star-wars-fighters:"+ process.env.MONGO_ATLAS_PW +"@star-wars-fighters.1t4ku.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-{
-  useMongoClient: true
-})
+)
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());

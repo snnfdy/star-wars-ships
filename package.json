@@ -1,0 +1,32 @@
+{
+  "name": "star-wars",
+  "version": "1.0.0",
+  "description": "A simple API to place people in various Star Wars ships",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "starwars",
+    "star",
+    "wars",
+    "ships",
+    "warships"
+  ],
+  "author": "Ifedayo Sanni",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.3",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
