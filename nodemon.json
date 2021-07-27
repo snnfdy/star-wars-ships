@@ -1,5 +1,5 @@
 {
     "env":{
-        "MONGO_ATLAS_PW":"star-wars-fighters"
+        "MONGO_ATLAS_PW":"star-wars-fight"
     }
 }

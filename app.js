@@ -4,8 +4,12 @@ const mongoose = require("mongoose");
 
 const fighterRoutes = require("./fighters");
 
-mongoose.connect("mongodb+srv://star-wars-fighters:"+ process.env.MONGO_ATLAS_PW +"@star-wars-fighters.1t4ku.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-)
+mongoose.connect("mongodb+srv://star-wars-fighters:star-wars-fight@star-wars-fighters.1t4ku.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+).catch((e)=>{console.log(e)})
+
+mongoose.connection.on("open",()=>{
+  console.log("Mongoose Connection")
+})
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());

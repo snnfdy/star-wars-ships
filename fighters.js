@@ -81,26 +81,15 @@ router.get("/:fighterId", (req,res,next)=>{
 
 router.patch("/:fighterId", (req,res,next)=>{
     const id = req.params.fighterId;
-    Fighter.findByIdAndUpdate(id, req.body).then(()=>{
-        Fighter.findOne(id).then((fighter)=>{
+    Fighter.findByIdAndUpdate(id, req.body).then(function(fighter){
             res.send(fighter);
-        })
-        
         })
     })
 router.delete("/:fighterId", (req,res,next)=>{
     const id = req.params.fighterId;
-    Fighter.remove({_id:id})
-        .exec()
-        .then(res=>{
-            res.status(200).json(result);
-        })
-        .catch(err=>{
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
+    Fighter.findByIdAndRemove(id).then(function(fighter){
+            res.send(fighter);
         });
-});
+});   
 
 module.exports=router;
