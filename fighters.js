@@ -90,6 +90,6 @@ router.delete("/:fighterId", (req,res,next)=>{
     Fighter.findByIdAndRemove(id).then(function(fighter){
             res.send(fighter);
         });
-});   
+});
 
 module.exports=router;
