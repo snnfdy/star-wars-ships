@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const fighter = require("./fighter");
 
 const fighterRoutes = require("./fighters");
 
@@ -28,6 +29,11 @@ app.use((req,res,next)=>{
 });
 
 app.use("/fighters", fighterRoutes); 
+
+
+app.use((req,res,next)=>{
+    res.status(200).json({"message":"Request Made"})
+})
 
 app.use((req,res,next)=>{
   const error= new Error("Not Found");
