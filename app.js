@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const fighter = require("./fighter");
+const fighter = require("./fighter");`
+require("dotenv").config();`
 
 const fighterRoutes = require("./fighters");
 
@@ -32,7 +33,7 @@ app.use("/fighters", fighterRoutes);
 
 
 app.use((req,res,next)=>{
-    res.status(200).json({"message":"Request Made"})
+     res.status(200).json({"message":"Request Made"})
 })
 
 app.use((req,res,next)=>{
