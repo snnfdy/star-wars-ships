@@ -10,6 +10,8 @@ const fighterSchema = mongoose.Schema({
     ship: String,
     url: String,
     password: String,
+    confirmed: {type: Boolean, defaultValue: false},
+    confirmToken: String,
     token: String
 });
 
