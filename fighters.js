@@ -59,7 +59,8 @@ router.post("/register", async (req,res)=>{
             sex,
             email: email.toLowerCase(),
             password: encryptedPassword,
-            confirmed: false
+            confirmed: false,
+            balance: 0
         })
 
         let number = shipNumbers[Math.floor(Math.random() * (max - min + 1)) + min];
@@ -180,6 +181,29 @@ router.get("/verify/:confirmToken", async(req,res)=>{
     }
 })
 
+router.post("/transfer/:fighterId", (req,res)=>{
+    const {amount,email} = req.body;
+    if (!(amount&&email)){
+        return res.status(400).send("Enter the email of the recipient and the amount you want to send pls")
+    }
+    const id = req.params.fighterId;
+    Fighter.findById(id)
+    .exec()
+    .then(doc=>{
+        if(doc){
+            doc.balance += amount;
+            console.log(doc)
+            return res.status(200).json({doc})
+        }else{
+            res.status(404).json({message: "No valid entry found for provided ID"});
+        }
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json({error: err});
+    })
+})
+
 router.get("/", (req,res,next)=>{
     Fighter.find()
         .exec()
@@ -202,6 +226,8 @@ router.get("/:fighterId", (req,res,next)=>{
     .then(doc=>{
         console.log("From database", doc);
         if (doc) {
+            // let result = doc
+            // res.status(200).json(result.email) 
             res.status(200).json({doc});
         } else{
             res.status(404).json({message: "No valid entry found for provided ID"});
@@ -229,5 +255,7 @@ router.delete("/:fighterId", (req,res,next)=>{
             res.send(fighter);
         });
 });
+
+
 
 module.exports=router;

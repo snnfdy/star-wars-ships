@@ -6,13 +6,23 @@ const fighterSchema = mongoose.Schema({
     last_name: String,
     age: Number,
     sex: String,
-    email: {type: String, unique: true},
+    email: {
+        type: String, 
+        unique: true
+    },
     ship: String,
     url: String,
     password: String,
-    confirmed: {type: Boolean, defaultValue: false},
+    confirmed: {
+        type: Boolean, 
+        defaultValue: false
+    },
     confirmToken: Number,
-    token: String
+    token: String,
+    balance :{
+        type: Number,
+        defaultValue: 0
+    }
 });
 
 module.exports = mongoose.model("Fighter", fighterSchema);
