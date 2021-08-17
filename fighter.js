@@ -11,7 +11,7 @@ const fighterSchema = mongoose.Schema({
     url: String,
     password: String,
     confirmed: {type: Boolean, defaultValue: false},
-    confirmToken: String,
+    confirmToken: Number,
     token: String
 });
 

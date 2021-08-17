@@ -138,14 +138,9 @@ router.post("/verify", async (req,res)=>{
                         pass: process.env.GMAIL_PASSWORD
                     }  
                 });
-                const confirmToken = jwt.sign(
-                    {fighter_id:fighter._id,email},
-                    "" + process.env.TOKEN_KEY,
-                    {
-                        expiresIn:"2h"
-                    }
-                );
+                const confirmToken = Math.floor(100000000 + Math.random() * 900000000);
                 fighter.confirmToken = confirmToken;
+                fighter.save()
                 console.log(fighter)
                 let mail = fighter.email
                 let mailOptions = {
@@ -156,9 +151,9 @@ router.post("/verify", async (req,res)=>{
                 }
                 transporter.sendMail(mailOptions, (error,info)=>{
                     if (error){
-                        console.log(error)
+                        return console.log(error)
                     }
-                    console.log("Message sent: %s", info.messageId);
+                    return console.log("Message sent: %s", info.messageId);
                 })
     
             })
@@ -173,9 +168,8 @@ router.post("/verify", async (req,res)=>{
 
 router.get("/verify/:confirmToken", async(req,res)=>{
     const confirmToken = req.params.confirmToken;
-    console.log("confirmToken",confirmToken)
-    const fighter = await Fighter.findOne({confirmToken: confirmToken.toString()})
-    console.log(fighter)
+    console.log("confirmToken:",confirmToken)
+    const fighter = await Fighter.findOne({confirmToken})
     if (fighter){
         fighter.confirmed = true;
         await fighter.save() 
@@ -199,13 +193,6 @@ router.get("/", (req,res,next)=>{
                 error: err
             });
         });
-        // const fighter = await Fighter.findOne({email});
-        // let mail=[]
-        //     for (i=0;i<fighter.length-1;i++){
-        //         mail += fighter[i].email;
-        //     }
-        //     console.log(mail);
-        
 });
 
 router.get("/:fighterId", (req,res,next)=>{
